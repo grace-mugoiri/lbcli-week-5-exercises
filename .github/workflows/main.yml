@@ -58,10 +58,11 @@ jobs:
 
       - name: 02.sh - Verify Redeem Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/02.sh
           SCRIPT=$(submission/02.sh)
-          REDEEM_SCRIPT=522102da2f10746e9778dd57bd0276a4f84101c4e0a711f9cfd9f09cde55acbdd2d1912102bfde48be4aa8f4bf76c570e98a8d287f9be5638412ab38dede8e78df82f33fa352ae
-          if [[ "$SCRIPT" == "$REDEEM_SCRIPT" ]]; then
+          EXPECTED_SHA=371580cfc5169fedc89930dc449c55414cca3d5b528372ecbc8eadf43fa772fd
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Redeem Script verification passed!"
           else
             echo "❌ Error: Redeem Script verification failed!"
@@ -70,10 +71,11 @@ jobs:
       
       - name: 03.sh - Verify P2SH Segwit Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/03.sh
           SCRIPT=$(submission/03.sh)
-          EXPECTED=2NByn92W1vH5oQC1daY69F5sU7PEStKKQBR
-          if [[ "$SCRIPT" == "$EXPECTED" ]]; then
+          EXPECTED_SHA=7050116588bb8837d0631547915ffc53a6a65f1d348024fc4cbe3c6c2e57136a
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: P2SH Segwit Script verification passed!"
           else
             echo "❌ Error: P2SH Segwit Script verification failed!"
@@ -82,10 +84,11 @@ jobs:
           
       - name: 04.sh - Verify CLTV Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/04.sh
           SCRIPT=$(submission/04.sh)
-          EXPECTED_OUTPUT=0420cd2459b17576a9141e51fcdc14be9a148bb0aaec9197eb47c83776fb88ac
-          if [[ "$SCRIPT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=9a04df80fbb0cead60b8f836072142763064173bffd3b5d7eabe03b01e184818
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: CLTV Script verification passed!"
           else
             echo "❌ Error: CLTV Script verification failed!"
@@ -94,10 +97,11 @@ jobs:
       
       - name: 05.sh - Verify CSV Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/05.sh
           SCRIPT=$(submission/05.sh)
-          EXPECTED_OUTPUT=029600b27576a9141e51fcdc14be9a148bb0aaec9197eb47c83776fb88ac
-          if [[ "$SCRIPT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=1e5b747170d8c17ee1ad8dcaaaf454afbe3d6f2e39a7518bc24866503ca7cbb6
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: CSV Script verification passed!"
           else
             echo "❌ Error: CSV Script verification failed!"
@@ -106,10 +110,11 @@ jobs:
 
       - name: 06.sh - Verify P2SH Address from Redeem Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/06.sh
           RESULT=$(submission/06.sh)
-          EXPECTED=2N8MytPW2ih27LctLjn6LfLFZZb1PFSsqBr
-          if [[ "$RESULT" == "$EXPECTED" ]]; then
+          EXPECTED_SHA=00a751933601c8185d489f70098e23e057edb51eef7038e8a4abc8d9d3e9f280
+          if [[ "$(actual_sha "$RESULT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: P2SH Address verification passed!"
           else
             echo "❌ Error: P2SH Address verification failed!"
@@ -118,10 +123,11 @@ jobs:
 
       - name: 07.sh - Verify 2-of-3 Multisig Redeem Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/07.sh
           SCRIPT=$(submission/07.sh)
-          EXPECTED_OUTPUT=522102da2f10746e9778dd57bd0276a4f84101c4e0a711f9cfd9f09cde55acbdd2d1912102bfde48be4aa8f4bf76c570e98a8d287f9be5638412ab38dede8e78df82f33fa32102e3af28965693b9ce1228f9d468149b831d6a0540b25e8a9900f71372c11fb27753ae
-          if [[ "$SCRIPT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=c3b078c65f4cc6cad019ca080be104bc8d0f106112c7e66d43f575e205cf13d0
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: 2-of-3 Multisig Redeem Script verification passed!"
           else
             echo "❌ Error: 2-of-3 Multisig Redeem Script verification failed!"
@@ -130,10 +136,11 @@ jobs:
 
       - name: 08.sh - Verify Time-based CSV Script
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/08.sh
           SCRIPT=$(submission/08.sh)
-          EXPECTED_OUTPUT=03a77640b27576a9141e51fcdc14be9a148bb0aaec9197eb47c83776fb88ac
-          if [[ "$SCRIPT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=5d001aabf113d96cc1222ee02ff96e2a876eea195a9a1dae6cbc08c04f86b2f4
+          if [[ "$(actual_sha "$SCRIPT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Time-based CSV Script verification passed!"
           else
             echo "❌ Error: Time-based CSV Script verification failed!"
